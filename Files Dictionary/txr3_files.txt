@@ -1,3 +1,5 @@
+# OFFSET, ENTRY NUMBER
+
 - 36a93000 ( Sky light ? )
 
 - 4d380800 ( Wheel )
@@ -35,6 +37,7 @@
 3da38800 : VGTS
 3db8d000 : VGTSCuFD 
 3e48f800 : J161CuBH
+6ae6e800 : FC3S Stats
 6ae94800 : Cars data
 6ae95800 : Tokyo Rivals data
 6ae9c000 : Nagoya rivals data
