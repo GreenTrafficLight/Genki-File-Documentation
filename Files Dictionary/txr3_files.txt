@@ -1,0 +1,44 @@
+- 36a93000 ( Sky light ? )
+
+- 4d380800 ( Wheel )
+
+- 6afdd000, 6911, ( UI ? )
+
+- 6b00f000, 6912, ( Logos, Title Screen, UI )
+
+- 6B04E000, 6913
+000ae900 = Cars description
+00101740 = Cars data
+00105300 = Tokyo rivals data
+001154c0 = Nagoya rivals data
+0011c140 = Osaka rivals data
+
+- 6B08E800, 6914
+00000080 = Teams description
+00009500 = Tokyo rivals description
+00054dc0 = Nagoya rivals description
+0007bdc0 = Osaka rivals description
+
+- 6b0b4000, 6915 ( Background ? )
+
+- 6b0fc000, 6916 ( Intro images )
+
+- NO FOLDERS
+3e5aa000 : JZX100
+3ca01000 : FC3S
+3ccad000 : FC3SCuTG
+3cf42000 : FD3S
+3d2a8000 : GT40
+3d8db800 : GNF50
+3d30c000 : GT40CuLO
+3d870800 : GH230
+3da38800 : VGTS
+3db8d000 : VGTSCuFD 
+3e48f800 : J161CuBH
+6ae94800 : Cars data
+6ae95800 : Tokyo Rivals data
+6ae9c000 : Nagoya rivals data
+6ae99800 : Osaka rivals data
+
+
+Car entry number = Car ID << 1 + 0x89

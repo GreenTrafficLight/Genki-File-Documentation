@@ -1,0 +1,195 @@
+# Tokyo Xtreme Racer series (script 0.3.1)
+# script for QuickBMS http://quickbms.aluigi.org
+
+quickbmsver "0.7.0"
+comtype uclpack
+
+open FDDE "TOC" 1
+
+open FDDE "DAT.DAT" 0 EXISTS
+if EXISTS == 0
+    open FDDE "DAT"
+endif
+
+get FILES long 1
+endian guess FILES  # x360 compatibility
+get DUMMY long 1
+get DUMMY long 1
+get DAT_SIZE long 1
+
+math METHOD = 0
+savepos TMP 1
+xmath TMP "TMP + (FILES * 0x14)"
+get TOC_SIZE asize 1
+if TMP u<= TOC_SIZE
+    math METHOD = 1
+endif
+
+math UNKNOWN = 0
+
+for i = 0 < FILES
+    get OFFSET long 1
+    math OFFSET * 0x800
+	string HEX p= "%08x" OFFSET
+	
+	if METHOD == 1
+        get DUMMY long 1
+    endif
+    get ZSIZE long 1
+    if METHOD == 0
+        get SIZE long 1
+        get ZERO long 1
+    else
+        math ZSIZE * 0x800
+        get ZERO long 1
+        get SIZE long 1
+    endif
+	
+	print "%i%, %HEX%, %SIZE%, %ZSIZE%"
+	
+	CallFunction DAT_EXTRACT 1
+	
+next i
+
+print "%UNKNOWN% UNKNOWNS"
+
+StartFunction DAT_EXTRACT
+
+    string NAME p= "%08x" OFFSET
+	if i != 0 && OFFSET == 0
+		math UNKNOWN + 1
+		#print "%ZSIZE% TEST"
+	else
+		# Not Compressed
+		if SIZE == 0 
+			log MEMORY_FILE OFFSET ZSIZE
+			CallFunction CONTAINER_EXTRACT 1 0 ZSIZE NAME
+		# Compressed
+		else 
+			clog MEMORY_FILE OFFSET ZSIZE SIZE
+			CallFunction CONTAINER_EXTRACT 1 0 SIZE NAME	
+		endif
+    endif
+	
+EndFunction
+
+StartFunction CHECK_COUNT
+	# CHECK_COUNT_ARG1 : SIZE
+
+	get COUNT long MEMORY_FILE
+	If COUNT == 0
+		Set COUNT long 0
+	else
+		xmath TMP2 "COUNT * 4"
+		If TMP2 > CHECK_COUNT_ARG1
+			Set COUNT long 0
+		endif
+		Set j long 0
+		Set LASTOFFSET long 0
+		Do
+			Set TMP2 long 0
+			get FILEOFFSET long MEMORY_FILE
+			If FILEOFFSET == 0
+				#print "Continue"
+				Continue
+			endif
+			If FILEOFFSET <= LASTOFFSET
+				Set COUNT long 0
+				#print "Break 1"
+				Break
+			endif
+			xmath TMP2 "COUNT * 4 + 4"
+			If FILEOFFSET < TMP2
+				Set COUNT long 0
+				Break
+			endif
+			If FILEOFFSET >= CHECK_COUNT_ARG1
+				Set COUNT long 0
+				Break
+			endif
+			Set LASTOFFSET long FILEOFFSET
+			Math j + 1
+		While j < COUNT
+	endif
+			
+EndFunction
+
+StartFunction CONTAINER_EXTRACT
+	# CONTAINER_EXTRACT_ARG1 : OFFSET
+	# CONTAINER_EXTRACT_ARG2 : SIZE
+	# CONTAINER_EXTRACT_ARG3 : NAME
+	
+	# GET COUNT
+	GoTo CONTAINER_EXTRACT_ARG1 MEMORY_FILE SEEK_SET
+	CallFunction CHECK_COUNT 1 CONTAINER_EXTRACT_ARG2
+	
+	# SKIP "COUNT" INTEGER
+	xmath SKIP_COUNT "CONTAINER_EXTRACT_ARG1 + 4"
+	GoTo SKIP_COUNT MEMORY_FILE SEEK_SET
+					
+	if COUNT == 0
+		#print "%CONTAINER_EXTRACT_ARG3%"
+		
+		# GET HEADER
+		GoTo CONTAINER_EXTRACT_ARG1 MEMORY_FILE SEEK_SET
+		GetDString HEADER 4 MEMORY_FILE
+		if HEADER == "TIM2"
+			set EXTENSION string ".tm2"
+		elif HEADER == "0IVX"
+			set EXTENSION string ".0ivx"
+		elif HEADER == "MIG."
+			set EXTENSION string ".gim"
+		elif HEADER == "OMG."
+			set EXTENSION string ".gmo"
+		elif HEADER == "‰PNG"
+			set EXTENSION string ".png"
+		elif HEADER == "EDIH"
+			set EXTENSION string ".edih"
+		else
+			set EXTENSION string ""
+		endif
+		string CONTAINER_EXTRACT_ARG3 + EXTENSION
+		
+		log CONTAINER_EXTRACT_ARG3 CONTAINER_EXTRACT_ARG1 CONTAINER_EXTRACT_ARG2 MEMORY_FILE
+	else
+		Set TMP_OFFSET = 0
+		for c = 1 <= COUNT				
+			Get OFFSET3 long MEMORY_FILE
+			if OFFSET3 != 0
+				Savepos TMP_POS MEMORY_FILE
+				
+				# Skip offset of value 0
+				if c != COUNT
+					Do
+						get TMP_OFFSET long MEMORY_FILE
+						if TMP_OFFSET != 0
+							Savepos TMP_POS MEMORY_FILE
+							math TMP_POS - 4
+						endif
+					While TMP_OFFSET == 0
+				endif
+				
+				# Calculate Size
+				if c == COUNT 
+					xmath SIZE3 "CONTAINER_EXTRACT_ARG2 - OFFSET3"
+				else
+					xmath SIZE3 "TMP_OFFSET - OFFSET3"
+				endif
+				
+				# SET NAME
+				string HEX_OFFSET3 p= "%08x" OFFSET3
+				set NAME3 string CONTAINER_EXTRACT_ARG3
+				string NAME3 + "/"
+				string NAME3 + HEX_OFFSET3
+												
+				Math OFFSET3 + CONTAINER_EXTRACT_ARG1
+				#print "%OFFSET3% | %SIZE3% | %NAME3%"
+				
+				CallFunction CONTAINER_EXTRACT 0 OFFSET3 SIZE3 NAME3
+								
+				GoTo TMP_POS MEMORY_FILE SEEK_SET
+			endif
+		next c
+	endif
+	
+EndFunction
