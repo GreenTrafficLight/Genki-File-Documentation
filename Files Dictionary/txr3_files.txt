@@ -4,39 +4,65 @@
 
 - 4d380800 : Wheel
 
-- 6afdd000, 6911, : UI ? 
+##### WHEN LOADING A COURSE #####
 
-- 6b00f000, 6912, : Logos, Title Screen, UI 
+3669c800, 0x8 : Textures
 
-- 6B04E000, 6913
+3669e800, 0x9 : ???
+
+366f2000, 0xB : Textures
+
+62bff000, 0x5366 : ???
+
+630ca000, 0x5367 : ???
+
+- 6324e000, 0x5368 : Course ?
+
+6aea9000, 684F : ???
+
+- 6aec5800, 0x685D
+
+6b14b800, 0x6926 : Genki Logo Textures
+
+##### NECESSARY ENTRIES AT THE START OF THE GAME #####
+
+- 6af58000, 0x690f : UI ( Circuit, garage, rival profile )
+
+- 6af9d800, 0x6910 : UI ? ( Wheels images, rival logos )
+
+- 6afdd000, 0x6911 : UI ? 
+
+- 6b00f000, 0x6912 : Logos, Title Screen, UI 
+
+- 6B04E000, 0x6913
 000ae900 = Cars description
 00101740 = Cars data
 00105300 = Tokyo rivals data
 001154c0 = Nagoya rivals data
 0011c140 = Osaka rivals data
 
-- 6B08E800, 6914
+- 6B08E800, 0x6914
 00000080 = Teams description
 00009500 = Tokyo rivals description
 00054dc0 = Nagoya rivals description
 0007bdc0 = Osaka rivals description
 
-- 6b0b4000, 6915 : Background ? 
+- 6b0b4000, 0x6915 : Background ? 
 
-- 6b0fc000, 6916 : Intro images 
+- 6b0fc000, 0x6916 : Intro images 
 
-### MODELS ###
+##### MODELS #####
 
-- 3e5aa000 : JZX100
+- 3ca01000, 0xBB : FC3S
+
+- 3cf42000, 0xB9 : FD3S
+
+- 3e5aa000, 0xD9 : JZX100
 00000030 = JZX100 Model
 000c4720 = JZX100 Textures
 0014f430 =
 
-- 3ca01000 : FC3S
-
-- 3ccad000 : FC3SCuTG
-
-- 3cf42000 : FD3S
+- 3ccad000, 0x145 : FC3SCuTG
 
 - 3d2a8000 : GT40
 
@@ -55,13 +81,13 @@
 ### NO FOLDERS ###
 
 -
-6ae6e800 : FC3S Stats
-
+6ae33800, 0x6775 : FC3S Stats ( in game ?)
+6ae6e800, 0x67EB : FC3S Stats ( in garage ? )
 -
 6ae94800 : Cars data
-6ae95800 : Tokyo Rivals data
+6ae95800, 0x6838 : Tokyo Rivals data
 6ae9c000 : Nagoya rivals data
 6ae99800 : Osaka rivals data
 
 
-Car entry number = Car ID << 1 + 0x89
+Car entry number = Car ID * 2 + 0x89
