@@ -53,14 +53,19 @@
 
 ##### MODELS #####
 
+1 = Model
+2 = Texture
+3 = ???
+
+- 3999c800, 0xAF : A86T
+
 - 3ca01000, 0xBB : FC3S
 
 - 3cf42000, 0xB9 : FD3S
 
+- 3BAF4000, 0xCD : CY15BK
+
 - 3e5aa000, 0xD9 : JZX100
-00000030 = JZX100 Model
-000c4720 = JZX100 Textures
-0014f430 =
 
 - 3ccad000, 0x145 : FC3SCuTG
 
@@ -90,4 +95,4 @@
 6ae99800 : Osaka rivals data
 
 
-Car entry number = Car ID * 2 + 0x89
+Car entry number = Chassis ID * 2 + 0x89
