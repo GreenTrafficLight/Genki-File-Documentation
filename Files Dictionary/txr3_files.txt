@@ -1,55 +1,81 @@
 # OFFSET, ENTRY NUMBER
 
-- 36a93000 : Sky light ? 
+- 0x36a93000 : Sky light ? 
 
-- 4d380800 : Wheel
+- 0x48207800, 0x22F : Brake ?
+
+- 0x48209800, 0x231 : Brake ?
+
+- 0x4d380800 : Wheel
+
+- 0x4BA6E000, 0xB7C : Wheel
+
+- 0x4C95B000, 0xE06 : Wheel
+
+0x5FD43000, 0x4B63 : Map textures ?
+
+0x6AF29800, 0x68B3 : Jintei logo
+
+0x6B139000, 0x6922 : Speedometer texture
+
+0x6B139800, 0x6923 : HUD textures
+
+0x6B145800, 0x6924 : HUD textures
+
+0x6B146800, 0x6925 : UI textures
+
+0x6b14b800, 0x6926 : Genki Logo Textures
+
+0x6B14C000, 0x6927 : Map HUD textures
+
+0x6B135800, 0x691E : Speedometer texture
 
 ##### WHEN LOADING A COURSE #####
 
-3669c800, 0x8 : Textures
+0x3669c800, 0x8 : Textures
 
-3669e800, 0x9 : ???
+0x3669e800, 0x9 : ???
 
-366f2000, 0xB : Textures
+0x366f2000, 0xB : Textures
 
-62bff000, 0x5366 : ???
+0x62bff000, 0x5366 : ???
 
-630ca000, 0x5367 : ???
+0x630ca000, 0x5367 : ???
 
-- 6324e000, 0x5368 : Course ?
+- 0x6324e000, 0x5368 : Course ?
 
-6aea9000, 684F : ???
+0x6aea9000, 684F : ???
 
-- 6aec5800, 0x685D
+- 0x6aec5800, 0x685D :
 
-6b14b800, 0x6926 : Genki Logo Textures
+0x6b14b800, 0x6926 : Genki Logo Textures
 
 ##### NECESSARY ENTRIES AT THE START OF THE GAME #####
 
-- 6af58000, 0x690f : UI ( Circuit, garage, rival profile )
+- 0x6af58000, 0x690f : UI ( Circuit, garage, rival profile )
 
-- 6af9d800, 0x6910 : UI ? ( Wheels images, rival logos )
+- 0x6af9d800, 0x6910 : UI ? ( Wheels images, rival logos )
 
-- 6afdd000, 0x6911 : UI ? 
+- 0x6afdd000, 0x6911 : UI ? 
 
-- 6b00f000, 0x6912 : Logos, Title Screen, UI 
+- 0x6b00f000, 0x6912 : Logos, Title Screen, UI 
 
-- 6B04E000, 0x6913
-000ae900 = Cars description
-00101740 = Cars data
-00105300 = Tokyo rivals data
-001154c0 = Nagoya rivals data
-0011c140 = Osaka rivals data
+- 0x6B04E000, 0x6913
+0x000ae900 = Cars description
+0x00101740 = Cars data
+0x00105300 = Tokyo Rival Selection data
+0x001154c0 = Nagoya Rival Selection data
+0x0011c140 = Osaka Rival Selection data
 
-- 6B08E800, 0x6914
-00000080 = Teams description
-00009500 = Tokyo rivals description
-00054dc0 = Nagoya rivals description
-0007bdc0 = Osaka rivals description
+- 0x6B08E800, 0x6914
+0x00000080 = Teams description
+0x00009500 = Tokyo rivals description
+0x00054dc0 = Nagoya rivals description
+0x0007bdc0 = Osaka rivals description
 
-- 6b0b4000, 0x6915 : Background ? 
+- 0x6b0b4000, 0x6915 : Background ? 
 
-- 6b0fc000, 0x6916 : Intro images 
+- 0x6b0fc000, 0x6916 : Intro images 
 
 ##### MODELS #####
 
@@ -57,42 +83,52 @@
 2 = Texture
 3 = ???
 
-- 3999c800, 0xAF : A86T
+- 0x3999c800, 0xAF : A86T
 
-- 3ca01000, 0xBB : FC3S
+- 0x3ca01000, 0xBB : FC3S
 
-- 3cf42000, 0xB9 : FD3S
+- 0x3cf42000, 0xB9 : FD3S
 
-- 3BAF4000, 0xCD : CY15BK
+- 0x3BAF4000, 0xCD : CY15BK
 
-- 3e5aa000, 0xD9 : JZX100
+- 0x3e5aa000, 0xD9 : JZX100
 
-- 3ccad000, 0x145 : FC3SCuTG
+- 0x3d2a8000 : GT40
 
-- 3d2a8000 : GT40
+- 0x3d8db800 : GNF50
 
-- 3d8db800 : GNF50
+- 0x3d30c000 : GT40CuLO
 
-- 3d30c000 : GT40CuLO
+- 0x3d870800 : GH230
 
-- 3d870800 : GH230
+- 0x3da38800 : VGTS
 
-- 3da38800 : VGTS
+- 0x3db8d000 : VGTSCuFD 
 
-- 3db8d000 : VGTSCuFD 
+- 0x3e48f800 : J161CuBH
 
-- 3e48f800 : J161CuBH
+- 0x41785800, 0x125 
+
+- 0x420B5000, 0x12A : R34CuEM
+
+- 0x422D7800, 0x12B : R34CuEM
+
+- 0x42497000, 0x12C : R34CuEM
+
+- 0x432c1000, 0x137 : 
+
+- 0x3ccad000, 0x145 : FC3SCuTG
 
 ### NO FOLDERS ###
 
 -
-6ae33800, 0x6775 : FC3S Stats ( in game ?)
-6ae6e800, 0x67EB : FC3S Stats ( in garage ? )
+0x6ae33800, 0x6775 : FC3S Stats ( in game ?)
+0x6ae6e800, 0x67EB : FC3S Stats ( in garage ? )
 -
-6ae94800 : Cars data
-6ae95800, 0x6838 : Tokyo Rivals data
-6ae9c000 : Nagoya rivals data
-6ae99800 : Osaka rivals data
+0x6ae94800 : Cars data
+0x6ae95800, 0x6838 : Tokyo Rivals data ( In course )
+0x6ae9c000, 0x6839 : Nagoya rivals data ( In course )
+0x6ae99800, 0x683A : Osaka rivals data ( In course )
 
 
 Car entry number = Chassis ID * 2 + 0x89
